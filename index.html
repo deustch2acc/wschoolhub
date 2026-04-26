@@ -1,0 +1,293 @@
+<script>
+
+  function openInBlank(url) {
+    // Opens a new window with about:blank
+    const newWin = window.open('about:blank', '_blank');
+    
+    // Ensure the window opened successfully
+    if (newWin) {
+      newWin.document.title = "W School Hub Revivied";
+      
+      // Create an iframe to house the site
+      const iframe = newWin.document.createElement('iframe');
+      
+      // Style the iframe to fill the screen
+      iframe.style.position = "fixed";
+      iframe.style.top = "0";
+      iframe.style.left = "0";
+      iframe.style.bottom = "0";
+      iframe.style.right = "0";
+      iframe.style.width = "100%";
+      iframe.style.height = "100%";
+      iframe.style.border = "none";
+      iframe.style.margin = "0";
+      iframe.style.padding = "0";
+      iframe.style.overflow = "auto";
+      iframe.style.zIndex = "999999";
+      
+      // Set the source to your desired URL
+      iframe.src = url;
+      
+      // Inject into the about:blank page
+      newWin.document.body.appendChild(iframe);
+      newWin.document.body.style.margin = "0";
+    }
+  }
+
+  // Example usage: openInBlank('https://example.com');
+
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>W School Hub revivied</title>
+    <style>
+        :root {
+            --bg-color: #310142;
+            --accent-1: #6a62fc;
+            --accent-2: #e562fc;
+            --text-color: #aab6f2;
+        }
+
+
+body { margin: 0; padding: 0; display: flex; justify-content: center; align-items: flex-start; /* Change to flex-start to allow top-aligning */ min-height: 100vh; background-color: var(--bg-color); font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; overflow-y: auto; /* Enable scrolling */ background-image: url("https://gifdb.com/gif/black-background-white-dot-mk788xjffmfikkb8.html"); padding-top: 20px; /* Space at top */ padding-bottom: 20px; /* Space at bottom */ }
+
+        /* Animated Background Gradients */
+        .background-glow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, #1e293b 0%, #0f172a 100%);
+            z-index: -1;
+        }
+
+        .glow-orb {
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-1);
+            filter: blur(100px);
+            opacity: 0.15;
+            border-radius: 50%;
+            animation: float 10s infinite alternate;
+        }
+
+        @keyframes float {
+            from { transform: translate(-20%, -20%); }
+            to { transform: translate(20%, 20%); }
+        }
+
+        /* Main Container - Changed to allow variable height */
+        .loader-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(176, 38, 255, 0.75);
+            padding: 2rem; /* Reduced padding slightly for better fit */
+            border-radius: 24px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 90%;
+            max-width: 400px;
+            height: auto; /* Let height be natural */
+            margin-bottom: 20px; /* Separation from bottom */
+        }
+
+        h1 {
+            color: var(--text-color);
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        p {
+            color: #94a3b8;
+            margin-bottom: 2.5rem;
+        }
+
+        /* Button Styling */
+        .btn-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .game-btn {
+            position: relative;
+            padding: 16px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            text-decoration: none;
+            display: block;
+        }
+
+        /* Hover Effects */
+        .game-btn:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.2);
+            border-color: var(--accent-1);
+            box-shadow: 0 10px 20px -10px var(--accent-1);
+        }
+
+        .game-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Distinctive colors for each button */
+        .btn-primary:hover {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+            border-color: var(--accent-1);
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.4);
+            border-color: var(--accent-2);
+        }
+
+        /* Subtle loading pulse */
+        .pulse {
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+        
+        @import url('https://fonts.googleapis.com/css2?family=Boldonse&display=swap');
+
+/* 2. Watermark Styles */
+        .watermark {
+            position: fixed;        /* Stays in place when scrolling */
+            bottom: 20px;           /* Distance from bottom */
+            left: 20px;             /* Distance from left */
+            
+            /* Customization */
+            font-family: 'Boldonse'; /* Your custom font name */
+            font-size: 36px;
+            color: rgba(31, 81, 255, 0.7); /* Color with 70% transparency */
+            font-weight: bold;
+            
+            /* Prevention of interactions */
+            pointer-events: none;   /* User can click "through" it */
+            user-select: none;      /* Prevents text selection */
+            z-index: 9999;          /* Ensures it stays on top of other content */
+            /* Glowing Effect */
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6, 0 0 20px #0073e6;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+    <div class="glow-orb"></div>
+
+    <div class="loader-card">
+        <h1 class="pulse">W School Hub Revived V1.7💯</h1>
+        <p>Select your destination.</p>
+       <p>W School Hub visit count since I added the counter on V1.6</p> 
+<!-- hitwebcounter Code START -->
+<div style="text-align: center; margin-top: -20px;">
+    <a href="https://www.hitwebcounter.com/convert-pdf-to-jpg" target="_blank">
+        <img src="https://hitwebcounter.com/counter/counter.php?page=21492260&style=0010&nbdigits=5&type=page&initCount=0" title="Visit Website" alt="Visit Website" style="border:0;" />
+    </a>
+</div>
+<!-- hitwebcounter Code END -->
+
+
+
+        
+        <div class="btn-container">
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/gn-math?f=2')" target="_blank" class="game-btn btn-primary">
+                🚀 Launch genizy math
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/ugs?f=2')" target="_blank" class="game-btn btn-secondary">
+                🕹️ Launch Ultimate Game Stash
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/youtube?f=2')" target="_blank" class="game-btn btn-primary">
+                🎮 Launch Youtube Unblocked
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/htmlrun?f=2')" target="_blank" class="game-btn btn-secondary">
+                📝 Run Custom HTML Files
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/howto-gnmath-new?f=2')" target="_blank" class="game-btn btn-primary">
+                🏗️ New Genizy Math
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/terminal?f=2')" target="_blank" class="game-btn btn-primary">
+                💻 Launch Terminal
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/url-convert?f=2')" target="_blank" class="game-btn btn-primary">
+                🔗 url converter
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/code-message?f=2')" target="_blank" class="game-btn btn-primary">
+                ✉️ encrypted messages
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/cdn-browser?f=2')" target="_blank" class="game-btn btn-primary">
+                🔗 Open Custom Browser
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/howto-nautilus-os?f=2')" target="_blank" class="game-btn btn-primary">
+                💽 Launch NautilusOS in browser
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/howto-gust-proxy?f=2')" target="_blank" class="game-btn btn-primary">
+                🌐 Open gust proxy
+            </button>
+            
+            <button onclick="openInBlank('https://js.do/goopfruit/code-editor?f=2')" target="_blank" class="game-btn btn-primary">
+                💻 make your own code
+            </button>
+         <p>Credit to Dutch Allen for creating W School Hub Revived. All code on here cannot be stolen by a kid like Kyzer.</p>
+        </div>
+    </div>
+    <div class="watermark">W SCHOOL HUB</div>
+    
+        <script>
+  (function() {
+    // Define the allowed URL
+    const allowedDomain = "wschoolhub.qzz.io";
+    
+    // Check if current URL contains the allowed domain
+    if (window.location.href.indexOf(allowedDomain) === -1) {
+      // Create and display the anti-theft message
+      document.body.innerHTML = 
+        "<div style='font-size: 30px; color: red; text-align: center; margin-top: 50px;'>" +
+        "🤡 imagine tryna steal code bro u aint getting crap dont be like kyzer 🤡" +
+        "</div>";
+    }
+  })();
+</script>
+
+<script>
+  function cb(response) {
+      document.getElementById('visits').innerText = response.value;
+  }
+</script>
+<script async src="https://countapi.xyz"></script>
+
+
+</body>
+</html>
