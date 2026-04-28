@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Changelog Popup</title>
+    <style>
+        :root {
+            --neon-cyan: #00f2fe;
+            --neon-blue: #4facfe;
+            --bg-dark: #0a0a0c;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        /* --- Popup Wrapper --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+
+        /* --- Popup Container (Sleek/Neon) --- */
+        .changelog-popup {
+            width: 400px;
+            max-width: 90%;
+            background: rgba(16, 16, 20, 0.8);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 0 20px rgba(0, 242, 254, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            animation: popupEntry 0.3s ease-out;
+        }
+
+        /* Neon Border Effect */
+        .changelog-popup::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: -2px; right: -2px; bottom: -2px;
+            background: linear-gradient(135deg, var(--neon-cyan), var(--neon-blue));
+            border-radius: 18px;
+            z-index: -1;
+            filter: blur(4px);
+            opacity: 0.5;
+        }
+
+        @keyframes popupEntry {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- Content Styling --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .header h2 {
+            margin: 0;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: white;
+            text-shadow: 0 0 10px var(--neon-cyan);
+        }
+
+        .version {
+            background: var(--glass);
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: var(--neon-cyan);
+            border: 1px solid var(--border);
+        }
+
+        .content {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #ccc;
+            max-height: 300px;
+            overflow-y: auto;
+            padding-right: 10px;
+        }
+
+        /* Custom Scrollbar */
+        .content::-webkit-scrollbar { width: 6px; }
+        .content::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        .content ul {
+            padding-left: 18px;
+            margin: 0;
+        }
+
+        .content li {
+            margin-bottom: 8px;
+        }
+
+        .content li strong {
+            color: white;
+        }
+
+        .footer {
+            margin-top: 24px;
+            text-align: right;
+        }
+
+        .close-btn {
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            transition: all 0.2s;
+        }
+
+        .close-btn:hover {
+            background: rgba(0, 242, 254, 0.1);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Popup Markup -->
+    <div class="popup-overlay" id="popup">
+        <div class="changelog-popup">
+            <div class="header">
+                <h2>Updates</h2>
+                <span class="version">v2.2</span>
+            </div>
+            
+            <div class="content">
+                <!-- EDIT THIS PART -->
+                <p>What's new in this version:</p>
+                <ul>
+                    <li><strong>Fixed Broken elements:</strong> I found the reson most stuff was broken. You need to be on mobile hotspot or home wifi.</li>
+
+                </ul>
+                <!-- END EDIT -->
+            </div>
+
+            <div class="footer">
+                <button class="close-btn" onclick="closePopup()">Got it</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
+
+</body>
+</html>
